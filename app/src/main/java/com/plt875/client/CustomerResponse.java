@@ -10,6 +10,10 @@ public class CustomerResponse {
 
     private String lastName;
 
+    public CustomerResponse() {
+
+    }
+
     public CustomerResponse(String id, String title, String firstName, String lastName) {
         this.id = id;
         this.title = title;
