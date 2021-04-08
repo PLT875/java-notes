@@ -16,7 +16,9 @@ public class DemoApiClient {
 
     private final static Logger LOGGER = Logger.getLogger(Logger.class.getName());
 
-    private final static String CUSTOMER_ENDPOINT =  "/api/v1/customer/%s";
+    private final static String CUSTOMER_RESOURCE_ENDPOINT = "/api/v1/customer/%s";
+
+    private final static String CUSTOMER_ENDPOINT = "/api/v1/customer";
 
     private String baseUrl;
 
@@ -28,7 +30,7 @@ public class DemoApiClient {
     }
 
     public HttpResponse<String> getCustomerById(String id) throws IOException, InterruptedException {
-        String uri = baseUrl.concat(String.format(CUSTOMER_ENDPOINT, id));
+        String uri = baseUrl.concat(String.format(CUSTOMER_RESOURCE_ENDPOINT, id));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
@@ -40,12 +42,32 @@ public class DemoApiClient {
     }
 
     public CustomerResponse getCustomer(String id) throws ExecutionException, InterruptedException {
-        String uri = baseUrl.concat(String.format(CUSTOMER_ENDPOINT, id));
+        String uri = baseUrl.concat(String.format(CUSTOMER_RESOURCE_ENDPOINT, id));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .uri(URI.create(uri))
                 .GET()
+                .build();
+
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(this::toCustomerResponse).get();
+    }
+
+    public CustomerResponse createCustomer(CreateCustomerRequest createCustomerRequest) throws JsonProcessingException,
+            ExecutionException, InterruptedException {
+
+        String uri = baseUrl.concat(CUSTOMER_ENDPOINT);
+
+        String requestBody = toRequestBody(createCustomerRequest);
+        System.out.println(requestBody);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .uri(URI.create(uri))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
         return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -60,6 +82,11 @@ public class DemoApiClient {
         } catch (JsonProcessingException e) {
             throw new CompletionException(e);
         }
+    }
+
+    public String toRequestBody(CreateCustomerRequest createCustomerRequest) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(createCustomerRequest);
     }
 
 }

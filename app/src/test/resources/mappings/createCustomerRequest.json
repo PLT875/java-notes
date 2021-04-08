@@ -1,0 +1,21 @@
+{
+  "request": {
+    "headers": {
+      "Accept": {
+        "equalTo": "application/json"
+      }
+    },
+    "method": "POST",
+    "urlPattern": "\/api\/v1\/customer",
+    "bodyPatterns" : [{
+      "equalToJson" : "{ \"title\": \"Mr.\", \"firstName\": \"Peter\", \"lastName\": \"Tran\" }"
+    }]
+  },
+  "response": {
+    "status": 201,
+    "bodyFileName": "customerResponseBody.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

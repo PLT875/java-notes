@@ -46,7 +46,17 @@ public class DemoApiClientIntegrationTest {
     @Test
     void shouldGetCustomer() throws Exception {
         CustomerResponse response = demoApiClient.getCustomer("id0");
-        assertEquals("id0", response.getId());
+        assertEquals("674570d2-0e3c-4f4b-a6a3-4bf0baa40e74", response.getId());
+        assertEquals("Mr.", response.getTitle());
+        assertEquals("Peter", response.getFirstName());
+        assertEquals("Tran", response.getLastName());
+    }
+
+    @Test
+    void shouldCreateCustomer() throws Exception {
+        CreateCustomerRequest request = new CreateCustomerRequest("Mr.", "Peter", "Tran");
+        CustomerResponse response = demoApiClient.createCustomer(request);
+        assertEquals("674570d2-0e3c-4f4b-a6a3-4bf0baa40e74", response.getId());
         assertEquals("Mr.", response.getTitle());
         assertEquals("Peter", response.getFirstName());
         assertEquals("Tran", response.getLastName());

@@ -1,8 +1,6 @@
 package com.plt875.client;
 
-public class CustomerResponse {
-
-    private String id;
+public class CreateCustomerRequest {
 
     private String title;
 
@@ -10,12 +8,10 @@ public class CustomerResponse {
 
     private String lastName;
 
-    public CustomerResponse() {
-
-    }
-
-    public String getId() {
-        return id;
+    public CreateCustomerRequest(String title, String firstName, String lastName) {
+        this.title = title;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getTitle() {
