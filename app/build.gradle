@@ -11,6 +11,12 @@ sourceCompatibility = '1.11'
 targetCompatibility = '1.11'
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
