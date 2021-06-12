@@ -2,7 +2,7 @@ package com.plt875.country;
 
 import java.util.Comparator;
 
-public class CountrySpeakersComparable implements Comparator<CountryLanguage> {
+public class CountrySpeakersComparator implements Comparator<CountryLanguage> {
 
     @Override
     public int compare(CountryLanguage cl0, CountryLanguage cl1) {
