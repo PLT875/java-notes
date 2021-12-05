@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,10 +37,13 @@ public class CacheTest {
         CountryLanguage cl2 = new CountryLanguage("CHE", "English", 10);
         CountryLanguage cl3 = new CountryLanguage("CHE", "German", 15);
         List<CountryLanguage> list0 = Arrays.asList(cl0, cl1, cl2, cl3);
-        Collections.sort(list0);
 
-        assertEquals(list0.get(0), cl1);
-        assertEquals(list0.get(3), cl0);
+        var sortedList = list0.stream()
+                .sorted(Comparator.comparing(CountryLanguage::getSpeakers))
+                .collect(Collectors.toList());
+
+        assertEquals(sortedList.get(0), cl1);
+        assertEquals(sortedList.get(3), cl0);
     }
 
     @Test
