@@ -4,7 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Getter
@@ -32,6 +34,19 @@ public class CountryLanguage implements Comparable<CountryLanguage> {
         return countryLanguages.stream()
                 .sorted(Comparator.comparing(CountryLanguage::getSpeakers).reversed())
                 .collect(Collectors.toList());
+    }
+
+    public static LinkedHashMap<CountryLanguage, Double> sortByValue(
+            Map<CountryLanguage, Double> countryLanguagesPercentage
+    ) {
+        LinkedHashMap<CountryLanguage, Double> result = new LinkedHashMap<>();
+        countryLanguagesPercentage
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEachOrdered(m -> result.put(m.getKey(), m.getValue()));
+
+        return result;
     }
 }
 
