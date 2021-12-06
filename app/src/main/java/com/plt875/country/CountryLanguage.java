@@ -3,6 +3,10 @@ package com.plt875.country;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @EqualsAndHashCode
 public class CountryLanguage implements Comparable<CountryLanguage> {
@@ -22,6 +26,12 @@ public class CountryLanguage implements Comparable<CountryLanguage> {
     @Override
     public int compareTo(CountryLanguage cl) {
         return this.getSpeakers() - cl.getSpeakers();
+    }
+
+    public static List<CountryLanguage> sortBySpeakers(List<CountryLanguage> countryLanguages) {
+        return countryLanguages.stream()
+                .sorted(Comparator.comparing(CountryLanguage::getSpeakers).reversed())
+                .collect(Collectors.toList());
     }
 }
 

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class CacheTest {
     }
 
     @Test
-    void shouldSortByCompareTo() {
+    void shouldSortByComparatorComparingSpeakers() {
         CountryLanguage cl0 = new CountryLanguage("CHE", "German", 20);
         CountryLanguage cl1 = new CountryLanguage("CHE", "French", 10);
         CountryLanguage cl2 = new CountryLanguage("CHE", "English", 10);
@@ -47,7 +48,7 @@ public class CacheTest {
     }
 
     @Test
-    void shouldSortByComparable() {
+    void shouldSortByCountrySpeakersComparator() {
         CountryLanguage cl0 = new CountryLanguage("CHE", "German", 20);
         CountryLanguage cl1 = new CountryLanguage("CHE", "French", 10);
         CountryLanguage cl2 = new CountryLanguage("CHE", "English", 10);
