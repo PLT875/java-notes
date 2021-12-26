@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,6 +55,23 @@ public class CountryLanguageTest {
             assertEquals(e.getValue(), expectedResult.get(counter));
             counter++;
         }
-
     }
+
+    @Test
+    void testSortedSet() {
+        SortedSet<CountryLanguage> countryLanguages = new TreeSet<>(new CountrySpeakersComparator());
+        CountryLanguage cl0 = new CountryLanguage("CHE", "German", 15);
+        CountryLanguage cl1 = new CountryLanguage("CHE", "French", 5);
+        CountryLanguage cl2 = new CountryLanguage("CHE", "English", 20);
+        CountryLanguage cl3 = new CountryLanguage("CHE", "Italian", 50);
+
+        countryLanguages.add(cl0);
+        countryLanguages.add(cl1);
+        countryLanguages.add(cl2);
+        countryLanguages.add(cl3);
+
+        assertEquals(5, countryLanguages.first().getSpeakers());
+        assertEquals(50, countryLanguages.last().getSpeakers());
+    }
+
 }
