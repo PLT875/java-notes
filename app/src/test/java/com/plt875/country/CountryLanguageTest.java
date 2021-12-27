@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,6 +74,19 @@ public class CountryLanguageTest {
 
         assertEquals(5, countryLanguages.first().getSpeakers());
         assertEquals(50, countryLanguages.last().getSpeakers());
+    }
+
+    @Test
+    void random() {
+        Stream<String> s = Stream.of("apple", "banana", "apricot", "orange", "apple");
+        LinkedHashMap<Character, String> m = s.collect(
+                Collectors.toMap(
+                        s1 -> s1.charAt(0),
+                        s1 -> s1,
+                        (s1, s2) -> s1 + "|" + s2,
+                        LinkedHashMap::new)
+        );
+        
     }
 
 }
