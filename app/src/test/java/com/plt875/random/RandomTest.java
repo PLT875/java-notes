@@ -2,6 +2,7 @@ package com.plt875.random;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -47,5 +48,16 @@ public class RandomTest {
         assertEquals(1, player.get(1).getKey());
         assertEquals(3, player.get(2).getKey());
         assertEquals(4, player.get(3).getKey());
+    }
+
+    @Test
+    void random3() {
+        List<String> words = Arrays.asList("hello", "world", "how", "world", "world");
+        Map<String, Integer> wordCount = words.stream()
+                .collect(Collectors.toMap(w -> w, w -> 1, (w1, w2) -> w1 + 1));
+
+        assertEquals(wordCount.get("world"), 3);
+        assertEquals(wordCount.get("hello"), 1);
+        assertEquals(wordCount.get("how"), 1);
     }
 }
