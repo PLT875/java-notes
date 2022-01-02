@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,11 +55,23 @@ public class RandomTest {
     @Test
     void random3() {
         List<String> words = Arrays.asList("hello", "world", "how", "world", "world");
-        Map<String, Integer> wordCount = words.stream()
-                .collect(Collectors.toMap(w -> w, w -> 1, (w1, w2) -> w1 + 1));
+        BinaryOperator<Integer> func = (x1, x2) -> x1 + x2;
+        BiFunction<Integer, Integer, Integer> func2 = func.andThen(x -> x * 2);
+        Integer result = func2.apply(2, 3);
+        assertEquals(10, result);
+
+        Map<String, Integer> wordCount = words.stream().collect(Collectors.toMap(w -> w, w -> 1, new DemoBinaryOperator()));
 
         assertEquals(wordCount.get("world"), 3);
         assertEquals(wordCount.get("hello"), 1);
         assertEquals(wordCount.get("how"), 1);
+    }
+
+    private class DemoBinaryOperator implements BinaryOperator<java.lang.Integer> {
+        @Override
+        public Integer apply(Integer i0, Integer i1) {
+            Integer result = i0 + i1;
+            return result;
+        }
     }
 }
