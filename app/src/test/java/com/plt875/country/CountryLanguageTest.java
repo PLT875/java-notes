@@ -3,6 +3,7 @@ package com.plt875.country;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,5 +75,21 @@ public class CountryLanguageTest {
 
         assertEquals(5, countryLanguages.first().getSpeakers());
         assertEquals(50, countryLanguages.last().getSpeakers());
+
+        /// same but without comparator class
+        SortedSet<CountryLanguage> countryLanguages2 = new TreeSet<>(new Comparator<CountryLanguage>() {
+            @Override
+            public int compare(CountryLanguage o1, CountryLanguage o2) {
+                return Integer.compare(o1.getSpeakers(), o2.getSpeakers());
+            }
+        });
+
+        countryLanguages2.add(cl0);
+        countryLanguages2.add(cl1);
+        countryLanguages2.add(cl2);
+        countryLanguages2.add(cl3);
+
+        assertEquals(5, countryLanguages2.first().getSpeakers());
+        assertEquals(50, countryLanguages2.last().getSpeakers());
     }
 }
