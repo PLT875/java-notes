@@ -1,3 +1,3 @@
-# java-11-http-tutorial
+# java-notes
 
-Just some examples and some notes.
+Just some notes.
