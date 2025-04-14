@@ -1,5 +1,6 @@
-package com.plt875.customer;
+package com.plt875.comparator;
 
+import com.plt875.model.Customer;
 import org.junit.jupiter.api.Test;
 
 import java.util.SortedSet;

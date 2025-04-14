@@ -1,4 +1,4 @@
-package com.plt875.array;
+package com.plt875.comparator;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,20 +24,20 @@ public class ComparatorFor2dArrayTest {
 
         // Arrays.sort(arr, Comparator.<int[]>comparingInt(a -> a[0]).thenComparingInt(c -> c[1]));
         Arrays.sort(arr, first.thenComparing(second));
-        assertEquals(arr[0][0], 2);
-        assertEquals(arr[0][1], 1);
+        assertEquals(2, arr[0][0]);
+        assertEquals(1, arr[0][1]);
 
-        assertEquals(arr[1][0], 2);
-        assertEquals(arr[1][1], 2);
+        assertEquals(2, arr[1][0]);
+        assertEquals(2, arr[1][1]);
 
-        assertEquals(arr[2][0], 2);
-        assertEquals(arr[2][1], 3);
+        assertEquals(2, arr[2][0]);
+        assertEquals(3, arr[2][1]);
 
-        assertEquals(arr[3][0], 3);
-        assertEquals(arr[3][1], 2);
+        assertEquals(3, arr[3][0]);
+        assertEquals(2, arr[3][1]);
 
-        assertEquals(arr[4][0], 5);
-        assertEquals(arr[4][1], 5);
+        assertEquals(5, arr[4][0]);
+        assertEquals(5, arr[4][1]);
     }
 
     @Test
@@ -52,19 +52,19 @@ public class ComparatorFor2dArrayTest {
 
         ComparatorFor2dArray comparator = new ComparatorFor2dArray();
         Arrays.sort(arr, comparator);
-        assertEquals(arr[0][0], 2);
-        assertEquals(arr[0][1], 1);
+        assertEquals(2, arr[0][0]);
+        assertEquals(1, arr[0][1]);
 
-        assertEquals(arr[1][0], 2);
-        assertEquals(arr[1][1], 2);
+        assertEquals(2, arr[1][0]);
+        assertEquals(2, arr[1][1]);
 
-        assertEquals(arr[2][0], 2);
-        assertEquals(arr[2][1], 3);
+        assertEquals(2, arr[2][0]);
+        assertEquals(3, arr[2][1]);
 
-        assertEquals(arr[3][0], 3);
-        assertEquals(arr[3][1], 2);
+        assertEquals(3, arr[3][0]);
+        assertEquals(2, arr[3][1]);
 
-        assertEquals(arr[4][0], 5);
-        assertEquals(arr[4][1], 5);
+        assertEquals(5, arr[4][0]);
+        assertEquals(5, arr[4][1]);
     }
 }

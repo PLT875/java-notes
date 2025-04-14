@@ -1,4 +1,4 @@
-package com.plt875.array;
+package com.plt875.comparator;
 
 import java.util.Comparator;
 

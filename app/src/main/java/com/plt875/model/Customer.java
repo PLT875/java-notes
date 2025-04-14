@@ -1,7 +1,10 @@
-package com.plt875.customer;
+package com.plt875.model;
+
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 public class Customer {
     private String name;
     private int age;
@@ -9,14 +12,6 @@ public class Customer {
     public Customer(String name, int age) {
         this.name = name;
         this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     @Override

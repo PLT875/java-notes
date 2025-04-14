@@ -1,4 +1,4 @@
-package com.plt875.random;
+package com.plt875.miscellaneous;
 
 import org.junit.jupiter.api.Test;
 

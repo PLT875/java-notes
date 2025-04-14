@@ -1,4 +1,6 @@
-package com.plt875.country;
+package com.plt875.comparator;
+
+import com.plt875.model.CountryLanguage;
 
 import java.util.Comparator;
 

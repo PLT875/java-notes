@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A producer is allowed to produce something more specific, hence extends. (covariance - use more derived type)
+ * A producer is allowed to produce something more specific, hence extends (covariance - use more derived type)
  * Use producer for reads, won’t let you add items.
- * A consumer is allowed to accept something more general, hence super. (contravariance - use more general type)
+ *
+ * A consumer is allowed to accept something more general, hence super (contravariance - use more general type)
  * User consumer for adds, can only read objects, cannot cast safely
  */
 public class Pecs {

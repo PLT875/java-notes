@@ -1,4 +1,4 @@
-package com.plt875.country;
+package com.plt875.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

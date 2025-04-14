@@ -1,5 +1,6 @@
-package com.plt875.country;
+package com.plt875.comparator;
 
+import com.plt875.model.CountryLanguage;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,12 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CountryLanguageTest {
+public class CountryLanguageComparatorTest {
 
     @Test
     void testSortBySpeakers() {
@@ -27,10 +26,10 @@ public class CountryLanguageTest {
         List<CountryLanguage> countryLanguages = Arrays.asList(cl0, cl1, cl2, cl3);
         List<CountryLanguage> result = CountryLanguage.sortBySpeakers(countryLanguages);
 
-        assertEquals(result.get(0).getSpeakers(), 60);
-        assertEquals(result.get(1).getSpeakers(), 15);
-        assertEquals(result.get(2).getSpeakers(), 10);
-        assertEquals(result.get(3).getSpeakers(), 5);
+        assertEquals(60, result.get(0).getSpeakers());
+        assertEquals(15, result.get(1).getSpeakers());
+        assertEquals(10, result.get(2).getSpeakers());
+        assertEquals(5, result.get(3).getSpeakers());
     }
 
     @Test
@@ -54,10 +53,39 @@ public class CountryLanguageTest {
 
         LinkedHashMap<CountryLanguage, Double> result = CountryLanguage.sortByValue(countryLanguagePercentage);
         int counter = 0;
-        for (Map.Entry e : result.entrySet()) {
+        for (Map.Entry<CountryLanguage, Double> e : result.entrySet()) {
             assertEquals(e.getValue(), expectedResult.get(counter));
             counter++;
         }
+    }
+
+    @Test
+    void shouldSortByComparatorComparingSpeakers() {
+        CountryLanguage cl0 = new CountryLanguage("CHE", "German", 20);
+        CountryLanguage cl1 = new CountryLanguage("CHE", "French", 10);
+        CountryLanguage cl2 = new CountryLanguage("CHE", "English", 10);
+        CountryLanguage cl3 = new CountryLanguage("CHE", "German", 15);
+        List<CountryLanguage> list0 = Arrays.asList(cl0, cl1, cl2, cl3);
+
+        var sortedList = list0.stream()
+                .sorted(Comparator.comparing(CountryLanguage::getSpeakers))
+                .toList();
+
+        assertEquals(sortedList.get(0), cl1);
+        assertEquals(sortedList.get(3), cl0);
+    }
+
+    @Test
+    void shouldSortByCountrySpeakersComparator() {
+        CountryLanguage cl0 = new CountryLanguage("CHE", "German", 20);
+        CountryLanguage cl1 = new CountryLanguage("CHE", "French", 10);
+        CountryLanguage cl2 = new CountryLanguage("CHE", "English", 10);
+        CountryLanguage cl3 = new CountryLanguage("CHE", "German", 15);
+        List<CountryLanguage> list0 = Arrays.asList(cl0, cl1, cl2, cl3);
+        list0.sort(new CountrySpeakersComparator());
+
+        assertEquals(list0.get(0), cl1);
+        assertEquals(list0.get(3), cl0);
     }
 
     @Test
